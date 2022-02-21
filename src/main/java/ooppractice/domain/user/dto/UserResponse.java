@@ -1,2 +1,5 @@
-package ooppractice.domain.user.dto;public class UserResponse {
+package ooppractice.domain.user.dto;
+
+public class UserResponse {
+
 }
