@@ -11,7 +11,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    private UserType userType;
+    private UserGrade userGrade;
     private int depositedMoney;
     private List<Order> orderList;
 
