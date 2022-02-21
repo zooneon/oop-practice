@@ -9,7 +9,7 @@ import java.util.List;
 public class User {
 
     private Long id;
-    private String userId;
+    private String username;
     private String password;
     private UserType userType;
     private int depositedMoney;
