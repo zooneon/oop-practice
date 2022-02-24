@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class CrudRepository<T extends Entity, ID extends Long> {
 
-    private static Map<Long, Entity> store = new ConcurrentHashMap<>();
-    private static Long sequence = 0L;
+    private Map<Long, Entity> store = new ConcurrentHashMap<>();
+    private Long sequence = 0L;
 
     public T save(T entity) {
         entity.setId(++sequence);
