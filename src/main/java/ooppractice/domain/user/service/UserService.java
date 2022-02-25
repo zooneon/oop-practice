@@ -5,7 +5,7 @@ import ooppractice.domain.user.dto.UserResponse;
 
 public interface UserService {
 
-    void login(String username, String password);
+    Long login(String username, String password);
 
     UserResponse getUser(Long id);
 
