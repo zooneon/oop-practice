@@ -8,7 +8,7 @@ public interface UserService {
 
     Long login(String username, String password);
 
-    UserResponse getUserBy(Long id);
+    UserResponse getUserById(Long id);
 
     void makeDeposit(Long id, int amount);
 

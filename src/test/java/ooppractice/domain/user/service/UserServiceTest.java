@@ -48,7 +48,7 @@ class UserServiceTest {
         //given
         Long id = 1L;
         //when
-        UserResponse userResponse = userService.getUserBy(id);
+        UserResponse userResponse = userService.getUserById(id);
         //then
         assertThat(userResponse.getUserGrade()).isEqualTo(user.getUserGrade());
         assertThat(userResponse.getDepositedMoney()).isEqualTo(user.getDepositedMoney());
