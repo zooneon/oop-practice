@@ -1,7 +1,6 @@
 package ooppractice.domain.user.service;
 
 import ooppractice.domain.user.domain.User;
-import ooppractice.domain.user.dto.UserResponse;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.exception.WrongPasswordException;
 import ooppractice.domain.user.repository.UserRepository;
@@ -48,10 +47,10 @@ class UserServiceTest {
         //given
         Long id = 1L;
         //when
-        UserResponse userResponse = userService.getUser(id);
+        User foundUser = userService.getUser(id);
         //then
-        assertThat(userResponse.getUserGrade()).isEqualTo(user.getUserGrade());
-        assertThat(userResponse.getDepositedMoney()).isEqualTo(user.getDepositedMoney());
+        assertThat(foundUser.getUserGrade()).isEqualTo(user.getUserGrade());
+        assertThat(foundUser.getDepositedMoney()).isEqualTo(user.getDepositedMoney());
     }
 
     @Test
