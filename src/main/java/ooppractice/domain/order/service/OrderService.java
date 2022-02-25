@@ -1,10 +1,11 @@
 package ooppractice.domain.order.service;
 
+import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.order.dto.OrderResponse;
 
 public interface OrderService {
 
-    void makeOrder(Long userId, String itemName, int quantity);
+    Order makeOrder(Long userId, String itemName, int quantity);
 
     void cancelOrder(Long orderId);
 

@@ -1,2 +1,6 @@
-package ooppractice.domain.payment.domain;public enum PaymentStatus {
+package ooppractice.domain.payment.domain;
+
+public enum PaymentStatus {
+    COMPLETE,
+    CANCEL
 }

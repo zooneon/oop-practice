@@ -5,7 +5,6 @@ import lombok.Getter;
 import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.order.domain.OrderStatus;
 import ooppractice.domain.orderitem.domain.OrderItem;
-import ooppractice.domain.payment.domain.PaymentStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,15 +31,13 @@ public class OrderListResponse {
         private OrderStatus orderStatus;
         private LocalDateTime orderDate;
         private List<OrderItem> orderItemList;
-        private PaymentStatus paymentStatus;
 
         @Builder
-        public OrderDto(Long orderId, OrderStatus orderStatus, LocalDateTime orderDate, List<OrderItem> orderItemList, PaymentStatus paymentStatus) {
+        public OrderDto(Long orderId, OrderStatus orderStatus, LocalDateTime orderDate, List<OrderItem> orderItemList) {
             this.orderId = orderId;
             this.orderStatus = orderStatus;
             this.orderDate = orderDate;
             this.orderItemList = orderItemList;
-            this.paymentStatus = paymentStatus;
         }
 
         public static OrderDto of(Order order) {
@@ -49,7 +46,6 @@ public class OrderListResponse {
                     .orderStatus(order.getOrderStatus())
                     .orderDate(order.getOrderDate())
                     .orderItemList(order.getOrderItemList())
-                    .paymentStatus(order.getPayment().getPaymentStatus())
                     .build();
         }
     }

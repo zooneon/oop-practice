@@ -34,4 +34,8 @@ public class User extends Entity {
     public void deposit(int amount) {
         this.depositedMoney += amount;
     }
+
+    public void addOrder(Order order) {
+        this.orderList.add(order);
+    }
 }
