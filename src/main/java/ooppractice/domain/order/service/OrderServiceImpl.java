@@ -31,9 +31,9 @@ public class OrderServiceImpl implements OrderService {
         User user = userService.getOrderUser(userId);
         List<OrderItem> orderItemList = makeOrderItemList(itemName, quantity);
         Order order = Order.createOrder(orderDate, user, orderItemList);
+        orderRepository.save(order);
         user.addOrder(order);
         orderItemList.forEach(orderItem -> orderItem.setOrder(order));
-        orderRepository.save(order);
         return order;
     }
 
