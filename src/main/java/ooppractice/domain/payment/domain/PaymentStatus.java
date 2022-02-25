@@ -1,2 +1,2 @@
-package ooppractice.domain.payment.domain;public class PaymentStatus {
+package ooppractice.domain.payment.domain;public enum PaymentStatus {
 }
