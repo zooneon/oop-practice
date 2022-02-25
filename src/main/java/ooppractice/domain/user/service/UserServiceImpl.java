@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(Long id) {
+    public UserResponse getUserBy(Long id) {
         User foundUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
-        return foundUser;
+        return UserResponse.of(foundUser);
     }
 
     @Override
@@ -40,5 +40,11 @@ public class UserServiceImpl implements UserService {
     public OrderListResponse getOrderList(Long id) {
         User foundUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
         return OrderListResponse.of(foundUser.getOrderList());
+    }
+
+    @Override
+    public User getOrderUser(Long id) {
+        User foundUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
+        return foundUser;
     }
 }
