@@ -11,7 +11,7 @@ class OrderItemTest {
     @Test
     void createOrderItem() {
         //given
-        Item item = new Item();
+        Item item = Item.builder().build();
         int orderQuantity = 5;
         //when
         OrderItem orderItem = OrderItem.createOrderItem(item, orderQuantity);

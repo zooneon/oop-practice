@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ItemService {
 
-    Item getItemByName(String itemName);
+    Item getItemByItemName(String itemName);
 
     List<Item> getItemListByCategory(String categoryName);
 }

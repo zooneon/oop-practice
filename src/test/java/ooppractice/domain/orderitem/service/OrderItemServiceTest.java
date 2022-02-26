@@ -23,15 +23,16 @@ class OrderItemServiceTest {
     @InjectMocks
     private OrderItemServiceImpl orderItemService;
 
-    private Item item = new Item();
+    private Item item = Item.builder().build();
 
+    //TODO: 판매 상태 예외 테스트
     //TODO: 재고 부족 예외 테스트
     @Test
     void makeOrderItem() {
         //given
         String itemName = "itemName";
         int quantity = 0;
-        given(itemService.getItemByName(itemName)).willReturn(item);
+        given(itemService.getItemByItemName(itemName)).willReturn(item);
         //when
         OrderItem orderItem = orderItemService.makeOrderItem(itemName, quantity);
         //then

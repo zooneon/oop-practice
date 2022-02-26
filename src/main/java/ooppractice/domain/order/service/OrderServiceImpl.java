@@ -7,6 +7,7 @@ import ooppractice.domain.order.exception.OrderNotFoundException;
 import ooppractice.domain.order.repository.OrderRepository;
 import ooppractice.domain.orderitem.domain.OrderItem;
 import ooppractice.domain.orderitem.exception.OutOfStockException;
+import ooppractice.domain.orderitem.exception.SoldOutException;
 import ooppractice.domain.orderitem.service.OrderItemService;
 import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.exception.UserNotFoundException;
@@ -27,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     private final GetLocalDateTime getLocalDateTime;
 
     @Override
-    public Order makeOrder(Long userId, String itemName, int quantity) throws UserNotFoundException, OutOfStockException {
+    public Order makeOrder(Long userId, String itemName, int quantity) throws UserNotFoundException, SoldOutException, OutOfStockException {
         LocalDateTime orderDate = getLocalDateTime.getNow();
         User user = userService.getOrderUser(userId);
         List<OrderItem> orderItemList = makeOrderItemList(itemName, quantity);
@@ -50,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
         return OrderResponse.of(foundOrder);
     }
 
-    private List<OrderItem> makeOrderItemList(String itemName, int quantity) throws OutOfStockException {
+    private List<OrderItem> makeOrderItemList(String itemName, int quantity) throws SoldOutException, OutOfStockException {
         List<OrderItem> orderItemList = new ArrayList<>();
         OrderItem orderItem = orderItemService.makeOrderItem(itemName, quantity);
         orderItemList.add(orderItem);
