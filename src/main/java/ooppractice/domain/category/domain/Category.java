@@ -27,4 +27,8 @@ public class Category extends Entity {
         this.categoryName = categoryName;
         this.itemList = new ArrayList<>();
     }
+
+    public void addItem(Item item) {
+        this.itemList.add(item);
+    }
 }

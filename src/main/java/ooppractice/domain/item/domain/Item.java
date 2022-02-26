@@ -38,4 +38,8 @@ public class Item extends Entity {
             this.salesStatus = SalesStatus.SOLD_OUT;
         }
     }
+
+    public void addCategory(Category category) {
+        this.categoryList.add(category);
+    }
 }
