@@ -8,11 +8,8 @@ import ooppractice.domain.order.repository.OrderRepository;
 import ooppractice.domain.orderitem.domain.OrderItem;
 import ooppractice.domain.orderitem.service.OrderItemService;
 import ooppractice.domain.user.domain.User;
-import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.service.UserService;
 import ooppractice.global.util.GetLocalDateTime;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,7 +40,7 @@ class OrderServiceTest {
     private LocalDateTime now = LocalDateTime.of(2022, 2, 25, 12, 0, 0);;
     private User user = User.builder().username("username").password("password").build();
     private Order order;
-    private OrderItem orderItem = new OrderItem();
+    private OrderItem orderItem = OrderItem.builder().build();
     private List<OrderItem> orderItemList = new ArrayList<>();
 
     @BeforeEach

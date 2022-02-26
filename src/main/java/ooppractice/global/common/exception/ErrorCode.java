@@ -15,7 +15,10 @@ public enum ErrorCode {
     WRONG_PASSWORD("U002", "비밀번호가 일치하지 않습니다."),
 
     //order
-    ORDER_NOT_FOUND("OR001", "해당 주문 정보를 찾을 수 없습니다.");
+    ORDER_NOT_FOUND("OR001", "해당 주문 정보를 찾을 수 없습니다."),
+
+    //orderitem
+    OUT_OF_STOCK("OT001","상품의 재고가 부족합니다.");
 
     private final String code;
     private final String message;

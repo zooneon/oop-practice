@@ -1,11 +1,14 @@
 package ooppractice.domain.item.service;
 
+import ooppractice.domain.item.domain.Item;
 import ooppractice.domain.item.dto.ItemListResponse;
 import ooppractice.domain.item.dto.ItemResponse;
 
+import java.util.List;
+
 public interface ItemService {
 
-    ItemResponse getItemByName(String itemName);
+    Item getItemByName(String itemName);
 
-    ItemListResponse getItemListByCategory(String categoryName);
+    List<Item> getItemListByCategory(String categoryName);
 }

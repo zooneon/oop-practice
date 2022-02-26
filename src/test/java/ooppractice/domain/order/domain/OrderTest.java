@@ -2,14 +2,13 @@ package ooppractice.domain.order.domain;
 
 import ooppractice.domain.orderitem.domain.OrderItem;
 import ooppractice.domain.user.domain.User;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderTest {
 
@@ -19,7 +18,7 @@ class OrderTest {
         LocalDateTime orderDate = LocalDateTime.of(2022, 2, 25, 12, 0, 0);
         User user = User.builder().build();
         List<OrderItem> orderItemList = new ArrayList<>();
-        orderItemList.add(new OrderItem());
+        orderItemList.add(OrderItem.builder().build());
         //when
         Order order = Order.createOrder(orderDate, user, orderItemList);
         //then
