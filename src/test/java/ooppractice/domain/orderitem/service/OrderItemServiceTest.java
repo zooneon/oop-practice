@@ -3,6 +3,8 @@ package ooppractice.domain.orderitem.service;
 import ooppractice.domain.item.domain.Item;
 import ooppractice.domain.item.service.ItemService;
 import ooppractice.domain.orderitem.domain.OrderItem;
+import ooppractice.domain.orderitem.exception.OutOfStockException;
+import ooppractice.domain.orderitem.exception.SoldOutException;
 import ooppractice.domain.orderitem.repository.OrderItemRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,20 +26,24 @@ class OrderItemServiceTest {
     @InjectMocks
     private OrderItemServiceImpl orderItemService;
 
-    private Item item = Item.builder().build();
+    private Item item = Item.builder().stockQuantity(10).build();
 
-    //TODO: 판매 상태 예외 테스트
-    //TODO: 재고 부족 예외 테스트
     @Test
     void makeOrderItem() {
         //given
         String itemName = "itemName";
-        int quantity = 0;
+        int properQuantity = 5;
+        int overQuantity = 15;
+        int remainQuantity = item.getStockQuantity() - properQuantity;
         given(itemService.getItemByItemName(itemName)).willReturn(item);
         //when
-        OrderItem orderItem = orderItemService.makeOrderItem(itemName, quantity);
+        OrderItem orderItem = orderItemService.makeOrderItem(itemName, properQuantity);
         //then
         assertThat(orderItem.getItem()).isEqualTo(item);
-        assertThat(orderItem.getOrderQuantity()).isEqualTo(quantity);
+        assertThat(orderItem.getOrderQuantity()).isEqualTo(properQuantity);
+        assertThat(item.getStockQuantity()).isEqualTo(remainQuantity);
+        assertThrows(OutOfStockException.class, () -> orderItemService.makeOrderItem(itemName, overQuantity));
+        item.reduceStockQuantity(remainQuantity);
+        assertThrows(SoldOutException.class, () -> orderItemService.makeOrderItem(itemName, properQuantity));
     }
 }

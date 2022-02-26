@@ -11,11 +11,12 @@ class ItemTest {
         //given
         String itemName = "itemName";
         int stockQuantity = 10;
-        int reduction = 5;
+        int reduction = 10;
         Item item = Item.builder().itemName(itemName).stockQuantity(stockQuantity).build();
         //when
         item.reduceStockQuantity(reduction);
         //then
         assertThat(item.getStockQuantity()).isEqualTo(stockQuantity - reduction);
+        assertThat(item.getSalesStatus()).isEqualTo(SalesStatus.SOLD_OUT);
     }
 }

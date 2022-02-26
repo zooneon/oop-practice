@@ -3,35 +3,34 @@ package ooppractice.domain.category.service;
 import ooppractice.domain.category.domain.Category;
 import ooppractice.domain.category.exception.CategoryNotFoundException;
 import ooppractice.domain.category.repository.CategoryRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+
+@ExtendWith(MockitoExtension.class)
 class CategoryServiceTest {
 
-    private CategoryRepository categoryRepository = new CategoryRepository();
-    private CategoryService categoryService = new CategoryServiceImpl(categoryRepository);
+    @Mock
+    private CategoryRepository categoryRepository;
+    @InjectMocks
+    private CategoryServiceImpl categoryService;
+
     private Category category = Category.builder().categoryName("categoryName").build();
-
-    @BeforeEach
-    void setUp() {
-        categoryRepository.save(category);
-    }
-
-    @AfterEach
-    void tearDown() {
-        categoryRepository.deleteAll();
-    }
 
     @Test
     void getCategoryByName() {
         //given
         String categoryName = "categoryName";
         String wrongName = "wrongName";
+        given(categoryRepository.findByCategoryName(categoryName)).willReturn(Optional.of(category));
         //when
         Category foundCategory = categoryService.getCategoryByName(categoryName);
         //then
