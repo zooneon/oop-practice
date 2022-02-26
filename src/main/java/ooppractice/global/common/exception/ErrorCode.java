@@ -22,7 +22,10 @@ public enum ErrorCode {
     SOLD_OUT("OT002", "매진된 상품입니다."),
 
     //item
-    ITEM_NOT_FOUND("IT001","해당 상품을 찾을 수 없습니다.");
+    ITEM_NOT_FOUND("IT001","해당 상품을 찾을 수 없습니다."),
+
+    //category
+    CATEGORY_NOT_FOUND("CT001", "해당 카테고리를 찾을 수 없습니다.");
 
     private final String code;
     private final String message;

@@ -2,6 +2,7 @@ package ooppractice.domain.item.service;
 
 import lombok.RequiredArgsConstructor;
 import ooppractice.domain.category.domain.Category;
+import ooppractice.domain.category.exception.CategoryNotFoundException;
 import ooppractice.domain.category.service.CategoryService;
 import ooppractice.domain.item.domain.Item;
 import ooppractice.domain.item.exception.ItemNotFoundException;
@@ -23,7 +24,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> getItemListByCategory(String categoryName) {
+    public List<Item> getItemListByCategory(String categoryName) throws CategoryNotFoundException {
         Category foundCategory = categoryService.getCategoryByName(categoryName);
         return foundCategory.getItemList();
     }
