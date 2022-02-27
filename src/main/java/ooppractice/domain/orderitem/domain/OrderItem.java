@@ -34,4 +34,8 @@ public class OrderItem extends Entity {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+    public int calculatePrice() {
+        return item.getPrice() * orderQuantity;
+    }
 }

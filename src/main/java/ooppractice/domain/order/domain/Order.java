@@ -47,4 +47,14 @@ public class Order extends Entity {
     public void cancelOrder() {
         this.orderStatus = OrderStatus.ORDER_CANCEL;
     }
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        orderItemList.stream().map(orderItem -> totalPrice + orderItem.calculatePrice());
+        return totalPrice;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 }

@@ -1,5 +1,6 @@
 package ooppractice.domain.payment.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import ooppractice.domain.order.domain.Order;
 import ooppractice.global.common.repository.Entity;
@@ -15,4 +16,28 @@ public class Payment extends Entity {
     private PaymentType paymentType;
     private Order order;
 
+    protected void setId(Long id) {
+        this.id = id;
+    }
+
+    @Builder
+    public Payment(PaymentStatus paymentStatus, LocalDateTime paymentDate, PaymentType paymentType, Order order) {
+        this.paymentStatus = paymentStatus;
+        this.paymentDate = paymentDate;
+        this.paymentType = paymentType;
+        this.order = order;
+    }
+
+    public static Payment makePayment(LocalDateTime paymentDate, PaymentType paymentType, Order order) {
+        return Payment.builder()
+                .paymentStatus(PaymentStatus.COMPLETE)
+                .paymentDate(paymentDate)
+                .paymentType(paymentType)
+                .order(order)
+                .build();
+    }
+
+    public void cancelPayment() {
+        this.paymentStatus = PaymentStatus.CANCEL;
+    }
 }

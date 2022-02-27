@@ -1,6 +1,7 @@
 package ooppractice.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
+import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.order.dto.OrderListResponse;
 import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.dto.UserResponse;
@@ -8,6 +9,8 @@ import ooppractice.domain.user.exception.WrongPasswordException;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.repository.UserRepository;
 import ooppractice.global.common.exception.ErrorCode;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -24,9 +27,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse getUserById(Long id) {
+    public User getUserById(Long id) {
         User foundUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
-        return UserResponse.of(foundUser);
+        return foundUser;
     }
 
     @Override
@@ -37,9 +40,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public OrderListResponse getOrderList(Long id) {
+    public List<Order> getOrderList(Long id) {
         User foundUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
-        return OrderListResponse.of(foundUser.getOrderList());
+        return foundUser.getOrderList();
     }
 
     @Override

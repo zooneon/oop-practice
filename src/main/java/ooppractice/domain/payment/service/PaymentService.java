@@ -1,13 +1,15 @@
 package ooppractice.domain.payment.service;
 
+import ooppractice.domain.payment.domain.Payment;
 import ooppractice.domain.payment.domain.PaymentType;
-import ooppractice.domain.payment.dto.PaymentListResponse;
+
+import java.util.List;
 
 public interface PaymentService {
 
-    void makePayment(Long orderId, PaymentType paymentType);
+    Payment makePayment(Long orderId, PaymentType paymentType);
 
     void cancelPayment(Long paymentId);
 
-    PaymentListResponse getPaymentList(Long userId);
+    List<Payment> getPaymentList(Long userId);
 }

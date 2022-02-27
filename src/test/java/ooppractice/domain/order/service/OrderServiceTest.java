@@ -2,7 +2,6 @@ package ooppractice.domain.order.service;
 
 import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.order.domain.OrderStatus;
-import ooppractice.domain.order.dto.OrderResponse;
 import ooppractice.domain.order.exception.OrderNotFoundException;
 import ooppractice.domain.order.repository.OrderRepository;
 import ooppractice.domain.orderitem.domain.OrderItem;
@@ -89,11 +88,11 @@ class OrderServiceTest {
         Long wrongId = 2L;
         given(orderRepository.findById(orderId)).willReturn(Optional.of(order));
         //when
-        OrderResponse orderResponse = orderService.getOrderById(orderId);
+        Order order = orderService.getOrderById(orderId);
         //then
-        assertThat(orderResponse.getOrderStatus()).isEqualTo(OrderStatus.PAYMENT_STAND_BY);
-        assertThat(orderResponse.getOrderDate()).isEqualTo(now);
-        assertThat(orderResponse.getOrderItemList()).isEqualTo(orderItemList);
+        assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.PAYMENT_STAND_BY);
+        assertThat(order.getOrderDate()).isEqualTo(now);
+        assertThat(order.getOrderItemList()).isEqualTo(orderItemList);
         assertThrows(OrderNotFoundException.class, () -> orderService.getOrderById(wrongId));
     }
 }

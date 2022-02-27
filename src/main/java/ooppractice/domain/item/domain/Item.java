@@ -17,6 +17,7 @@ public class Item extends Entity {
     private Long id;
     private String itemName;
     private SalesStatus salesStatus;
+    private int price;
     private int stockQuantity;
     private List<Category> categoryList;
 
@@ -25,8 +26,9 @@ public class Item extends Entity {
     }
 
     @Builder
-    public Item(String itemName, int stockQuantity) {
+    public Item(String itemName, int price, int stockQuantity) {
         this.itemName = itemName;
+        this.price = price;
         this.salesStatus = SalesStatus.ON_SALE;
         this.stockQuantity = stockQuantity;
         this.categoryList = new ArrayList<>();

@@ -2,7 +2,6 @@ package ooppractice.domain.order.service;
 
 import lombok.RequiredArgsConstructor;
 import ooppractice.domain.order.domain.Order;
-import ooppractice.domain.order.dto.OrderResponse;
 import ooppractice.domain.order.exception.OrderNotFoundException;
 import ooppractice.domain.order.repository.OrderRepository;
 import ooppractice.domain.orderitem.domain.OrderItem;
@@ -46,9 +45,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse getOrderById(Long orderId) {
+    public Order getOrderById(Long orderId) {
         Order foundOrder = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(ErrorCode.ORDER_NOT_FOUND));
-        return OrderResponse.of(foundOrder);
+        return foundOrder;
     }
 
     private List<OrderItem> makeOrderItemList(String itemName, int quantity) throws SoldOutException, OutOfStockException {

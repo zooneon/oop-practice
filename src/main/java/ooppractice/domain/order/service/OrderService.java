@@ -9,5 +9,5 @@ public interface OrderService {
 
     void cancelOrder(Long orderId);
 
-    OrderResponse getOrderById(Long orderId);
+    Order getOrderById(Long orderId);
 }

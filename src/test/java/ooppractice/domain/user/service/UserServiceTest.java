@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,10 +53,10 @@ class UserServiceTest {
         Long id = 1L;
         given(userRepository.findById(id)).willReturn(Optional.of(user));
         //when
-        UserResponse userResponse = userService.getUserById(id);
+        User user = userService.getUserById(id);
         //then
-        assertThat(userResponse.getUserGrade()).isEqualTo(user.getUserGrade());
-        assertThat(userResponse.getDepositedMoney()).isEqualTo(user.getDepositedMoney());
+        assertThat(user.getUserGrade()).isEqualTo(user.getUserGrade());
+        assertThat(user.getDepositedMoney()).isEqualTo(user.getDepositedMoney());
     }
 
     @Test
@@ -79,9 +80,9 @@ class UserServiceTest {
         user.addOrder(order);
         given(userRepository.findById(id)).willReturn(Optional.of(user));
         //when
-        OrderListResponse orderList = userService.getOrderList(id);
+        List<Order> orderList = userService.getOrderList(id);
         //then
-        assertThat(orderList.getOrderDtoList().get(0).getOrderStatus()).isEqualTo(OrderStatus.ORDER_COMPLETE);
+        assertThat(orderList.get(0).getOrderStatus()).isEqualTo(OrderStatus.ORDER_COMPLETE);
     }
 
     @Test

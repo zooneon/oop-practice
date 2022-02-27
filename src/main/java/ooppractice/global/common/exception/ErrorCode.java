@@ -25,7 +25,11 @@ public enum ErrorCode {
     ITEM_NOT_FOUND("IT001","해당 상품을 찾을 수 없습니다."),
 
     //category
-    CATEGORY_NOT_FOUND("CT001", "해당 카테고리를 찾을 수 없습니다.");
+    CATEGORY_NOT_FOUND("CT001", "해당 카테고리를 찾을 수 없습니다."),
+
+    //payment
+    PAYMENT_NOT_FOUND("P001", "해당 결제 정보를 찾을 수 없습니다."),
+    NOT_ENOUGH_MONEY("P002", "입금액이 부족합니다.");
 
     private final String code;
     private final String message;
