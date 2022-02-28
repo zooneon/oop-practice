@@ -1,5 +1,6 @@
 package ooppractice.domain.order.domain;
 
+import ooppractice.domain.order.exception.OrderAlreadyCanceledException;
 import ooppractice.domain.orderitem.domain.OrderItem;
 import ooppractice.domain.user.domain.User;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 class OrderTest {
 
@@ -33,9 +35,11 @@ class OrderTest {
     void cancelOrder() {
         //given
         Order order = Order.builder().orderStatus(OrderStatus.PAYMENT_STAND_BY).build();
+        Order canceledOrder = Order.builder().orderStatus(OrderStatus.ORDER_CANCEL).build();
         //when
         order.cancelOrder();
         //then
         assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.ORDER_CANCEL);
+        assertThrows(OrderAlreadyCanceledException.class, () -> canceledOrder.cancelOrder());
     }
 }

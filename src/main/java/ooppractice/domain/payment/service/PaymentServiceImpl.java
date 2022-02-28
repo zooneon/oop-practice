@@ -2,13 +2,15 @@ package ooppractice.domain.payment.service;
 
 import lombok.RequiredArgsConstructor;
 import ooppractice.domain.order.domain.Order;
+import ooppractice.domain.order.domain.OrderStatus;
+import ooppractice.domain.order.exception.OrderAlreadyCanceledException;
 import ooppractice.domain.order.exception.OrderNotFoundException;
 import ooppractice.domain.order.service.OrderService;
 import ooppractice.domain.payment.domain.Payment;
 import ooppractice.domain.payment.domain.PaymentType;
+import ooppractice.domain.payment.exception.PaymentAlreadyCanceledException;
 import ooppractice.domain.payment.exception.PaymentNotFoundException;
 import ooppractice.domain.payment.repository.PaymentRepository;
-import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.exception.NotEnoughMoneyException;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.global.common.exception.ErrorCode;
@@ -29,9 +31,11 @@ public class PaymentServiceImpl implements PaymentService {
     public Payment makePayment(Long orderId, PaymentType paymentType) throws OrderNotFoundException, NotEnoughMoneyException {
         LocalDateTime paymentDate = getLocalDateTime.getNow();
         Order order = orderService.getOrderById(orderId);
-        User orderUser = order.getUser();
+        if (order.getOrderStatus() == OrderStatus.ORDER_CANCEL) {
+            throw new OrderAlreadyCanceledException(ErrorCode.ORDER_ALREADY_CANCELED);
+        }
         int afterCalculateBenefit = paymentType.calculateBenefit(order.getTotalPrice());
-        orderUser.payCharge(afterCalculateBenefit);
+        order.getUser().payCharge(afterCalculateBenefit);
         Payment payment = Payment.makePayment(paymentDate, paymentType, order);
         paymentRepository.save(payment);
         order.setPayment(payment);
@@ -39,7 +43,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void cancelPayment(Long paymentId) {
+    public void cancelPayment(Long paymentId) throws PaymentAlreadyCanceledException {
         Payment foundPayment = paymentRepository.findById(paymentId).orElseThrow(() -> new PaymentNotFoundException(ErrorCode.PAYMENT_NOT_FOUND));
         foundPayment.cancelPayment();
     }

@@ -63,7 +63,7 @@ class PaymentServiceTest {
         //then
         assertThat(payment.getPaymentDate()).isEqualTo(now);
         assertThat(payment.getPaymentType()).isEqualTo(PaymentType.N_PAY);
-        assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.COMPLETE);
+        assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.PAYMENT_COMPLETE);
         assertThat(user.getDepositedMoney()).isEqualTo(depositedMoney - afterCalculateBenefit);
         assertThat(user.getUserGrade()).isEqualTo(UserGrade.GOLD);
     }
@@ -72,12 +72,12 @@ class PaymentServiceTest {
     void cancelPayment() {
         //given
         Long id = 1L;
-        Payment payment = Payment.builder().paymentStatus(PaymentStatus.COMPLETE).build();
+        Payment payment = Payment.builder().paymentStatus(PaymentStatus.PAYMENT_COMPLETE).build();
         given(paymentRepository.findById(id)).willReturn(Optional.of(payment));
         //when
         paymentService.cancelPayment(id);
         //then
-        assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.CANCEL);
+        assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.PAYMENT_CANCEL);
     }
 
     @Test

@@ -2,6 +2,7 @@ package ooppractice.domain.order.service;
 
 import lombok.RequiredArgsConstructor;
 import ooppractice.domain.order.domain.Order;
+import ooppractice.domain.order.exception.OrderAlreadyCanceledException;
 import ooppractice.domain.order.exception.OrderNotFoundException;
 import ooppractice.domain.order.exception.PaymentNotCanceledException;
 import ooppractice.domain.order.repository.OrderRepository;
@@ -41,9 +42,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void cancelOrder(Long orderId) {
+    public void cancelOrder(Long orderId) throws OrderAlreadyCanceledException {
         Order foundOrder = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(ErrorCode.ORDER_NOT_FOUND));
-        if (foundOrder.getPayment().getPaymentStatus() != PaymentStatus.CANCEL) {
+        if (foundOrder.getPayment().getPaymentStatus() != PaymentStatus.PAYMENT_CANCEL) {
             throw new PaymentNotCanceledException(ErrorCode.PAYMENT_NOT_CANCELED);
         }
         foundOrder.cancelOrder();

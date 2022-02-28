@@ -17,8 +17,9 @@ public enum ErrorCode {
     //order
     ORDER_NOT_FOUND("OR001", "해당 주문 정보를 찾을 수 없습니다."),
     PAYMENT_NOT_CANCELED("OR002", "결제가 취소되지 않았습니다."),
+    ORDER_ALREADY_CANCELED("OR003", "이미 취소된 주문입니다."),
 
-    //orderitem
+    //order item
     OUT_OF_STOCK("OT001","상품의 재고가 부족합니다."),
     SOLD_OUT("OT002", "매진된 상품입니다."),
 
@@ -30,7 +31,8 @@ public enum ErrorCode {
 
     //payment
     PAYMENT_NOT_FOUND("P001", "해당 결제 정보를 찾을 수 없습니다."),
-    NOT_ENOUGH_MONEY("P002", "입금액이 부족합니다.");
+    NOT_ENOUGH_MONEY("P002", "입금액이 부족합니다."),
+    PAYMENT_ALREADY_CANCELED("P003", "이미 취소된 결제입니다.");
 
     private final String code;
     private final String message;

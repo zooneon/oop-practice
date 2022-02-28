@@ -1,11 +1,14 @@
 package ooppractice.domain.payment.domain;
 
 import ooppractice.domain.order.domain.Order;
+import ooppractice.domain.payment.exception.PaymentAlreadyCanceledException;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PaymentTest {
 
@@ -19,7 +22,7 @@ class PaymentTest {
         Payment payment = Payment.makePayment(paymentDate, paymentType, order);
         //then
         assertThat(payment.getPaymentDate()).isEqualTo(paymentDate);
-        assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.COMPLETE);
+        assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.PAYMENT_COMPLETE);
         assertThat(payment.getPaymentType()).isEqualTo(paymentType);
         assertThat(payment.getOrder()).isEqualTo(order);
     }
@@ -27,10 +30,12 @@ class PaymentTest {
     @Test
     void cancelPayment() {
         //given
-        Payment payment = Payment.builder().paymentStatus(PaymentStatus.COMPLETE).build();
+        Payment payment = Payment.builder().paymentStatus(PaymentStatus.PAYMENT_COMPLETE).build();
+        Payment canceledPayment = Payment.builder().paymentStatus(PaymentStatus.PAYMENT_CANCEL).build();
         //when
         payment.cancelPayment();
         //then
-        assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.CANCEL);
+        assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.PAYMENT_CANCEL);
+        assertThrows(PaymentAlreadyCanceledException.class, () -> canceledPayment.cancelPayment());
     }
 }

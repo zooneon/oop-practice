@@ -4,9 +4,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ooppractice.domain.order.exception.OrderAlreadyCanceledException;
 import ooppractice.domain.orderitem.domain.OrderItem;
 import ooppractice.domain.payment.domain.Payment;
 import ooppractice.domain.user.domain.User;
+import ooppractice.global.common.exception.ErrorCode;
 import ooppractice.global.common.repository.Entity;
 
 import java.time.LocalDateTime;
@@ -45,6 +47,9 @@ public class Order extends Entity {
     }
 
     public void cancelOrder() {
+        if (this.orderStatus == OrderStatus.ORDER_CANCEL) {
+            throw new OrderAlreadyCanceledException(ErrorCode.ORDER_ALREADY_CANCELED);
+        }
         this.orderStatus = OrderStatus.ORDER_CANCEL;
     }
 

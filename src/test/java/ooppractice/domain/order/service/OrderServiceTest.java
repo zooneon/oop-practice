@@ -77,7 +77,7 @@ class OrderServiceTest {
         Long orderId = 1L;
         Long wrongId = 2L;
         given(orderRepository.findById(orderId)).willReturn(Optional.of(order));
-        Payment payment = Payment.builder().paymentStatus(PaymentStatus.COMPLETE).build();
+        Payment payment = Payment.builder().paymentStatus(PaymentStatus.PAYMENT_COMPLETE).build();
         order.setPayment(payment);
         //when
         //then

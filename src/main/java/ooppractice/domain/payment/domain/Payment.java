@@ -3,6 +3,8 @@ package ooppractice.domain.payment.domain;
 import lombok.Builder;
 import lombok.Getter;
 import ooppractice.domain.order.domain.Order;
+import ooppractice.domain.payment.exception.PaymentAlreadyCanceledException;
+import ooppractice.global.common.exception.ErrorCode;
 import ooppractice.global.common.repository.Entity;
 
 import java.time.LocalDateTime;
@@ -30,7 +32,7 @@ public class Payment extends Entity {
 
     public static Payment makePayment(LocalDateTime paymentDate, PaymentType paymentType, Order order) {
         return Payment.builder()
-                .paymentStatus(PaymentStatus.COMPLETE)
+                .paymentStatus(PaymentStatus.PAYMENT_COMPLETE)
                 .paymentDate(paymentDate)
                 .paymentType(paymentType)
                 .order(order)
@@ -38,6 +40,9 @@ public class Payment extends Entity {
     }
 
     public void cancelPayment() {
-        this.paymentStatus = PaymentStatus.CANCEL;
+        if (this.paymentStatus == PaymentStatus.PAYMENT_CANCEL) {
+            throw new PaymentAlreadyCanceledException(ErrorCode.PAYMENT_ALREADY_CANCELED);
+        }
+        this.paymentStatus = PaymentStatus.PAYMENT_CANCEL;
     }
 }
