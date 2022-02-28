@@ -3,11 +3,13 @@ package ooppractice.domain.order.service;
 import lombok.RequiredArgsConstructor;
 import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.order.exception.OrderNotFoundException;
+import ooppractice.domain.order.exception.PaymentNotCanceledException;
 import ooppractice.domain.order.repository.OrderRepository;
 import ooppractice.domain.orderitem.domain.OrderItem;
 import ooppractice.domain.orderitem.exception.OutOfStockException;
 import ooppractice.domain.orderitem.exception.SoldOutException;
 import ooppractice.domain.orderitem.service.OrderItemService;
+import ooppractice.domain.payment.domain.PaymentStatus;
 import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.service.UserService;
@@ -41,6 +43,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void cancelOrder(Long orderId) {
         Order foundOrder = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(ErrorCode.ORDER_NOT_FOUND));
+        if (foundOrder.getPayment().getPaymentStatus() != PaymentStatus.CANCEL) {
+            throw new PaymentNotCanceledException(ErrorCode.PAYMENT_NOT_CANCELED);
+        }
         foundOrder.cancelOrder();
     }
 
@@ -48,6 +53,12 @@ public class OrderServiceImpl implements OrderService {
     public Order getOrderById(Long orderId) {
         Order foundOrder = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(ErrorCode.ORDER_NOT_FOUND));
         return foundOrder;
+    }
+
+    @Override
+    public List<Order> getOrderList(Long userId) throws UserNotFoundException {
+        User foundUser = userService.getUserById(userId);
+        return foundUser.getOrderList();
     }
 
     private List<OrderItem> makeOrderItemList(String itemName, int quantity) throws SoldOutException, OutOfStockException {

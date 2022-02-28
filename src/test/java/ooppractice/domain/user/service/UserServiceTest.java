@@ -1,7 +1,5 @@
 package ooppractice.domain.user.service;
 
-import ooppractice.domain.order.domain.Order;
-import ooppractice.domain.order.domain.OrderStatus;
 import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.exception.WrongPasswordException;
@@ -13,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,18 +65,5 @@ class UserServiceTest {
         userService.makeDeposit(id, amount);
         //then
         assertThat(user.getDepositedMoney()).isEqualTo(expected);
-    }
-
-    @Test
-    void getOrderList() {
-        //given
-        Long id = 1L;
-        Order order = Order.builder().orderStatus(OrderStatus.ORDER_COMPLETE).build();
-        user.addOrder(order);
-        given(userRepository.findById(id)).willReturn(Optional.of(user));
-        //when
-        List<Order> orderList = userService.getOrderList(id);
-        //then
-        assertThat(orderList.get(0).getOrderStatus()).isEqualTo(OrderStatus.ORDER_COMPLETE);
     }
 }

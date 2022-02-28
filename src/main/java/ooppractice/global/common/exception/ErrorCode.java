@@ -16,6 +16,7 @@ public enum ErrorCode {
 
     //order
     ORDER_NOT_FOUND("OR001", "해당 주문 정보를 찾을 수 없습니다."),
+    PAYMENT_NOT_CANCELED("OR002", "결제가 취소되지 않았습니다."),
 
     //orderitem
     OUT_OF_STOCK("OT001","상품의 재고가 부족합니다."),

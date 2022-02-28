@@ -8,7 +8,6 @@ import ooppractice.domain.payment.domain.PaymentType;
 import ooppractice.domain.payment.repository.PaymentRepository;
 import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.domain.UserGrade;
-import ooppractice.domain.user.service.UserService;
 import ooppractice.global.util.GetLocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +30,6 @@ class PaymentServiceTest {
 
     @Mock private PaymentRepository paymentRepository;
     @Mock private OrderService orderService;
-    @Mock private UserService userService;
     @Mock private GetLocalDateTime getLocalDateTime;
 
     @InjectMocks
@@ -90,7 +88,7 @@ class PaymentServiceTest {
         order.setPayment(payment);
         List<Order> orderList = new ArrayList<>();
         orderList.add(order);
-        given(userService.getOrderList(id)).willReturn(orderList);
+        given(orderService.getOrderList(id)).willReturn(orderList);
         //when
         List<Payment> paymentList = paymentService.getPaymentList(id);
         //then

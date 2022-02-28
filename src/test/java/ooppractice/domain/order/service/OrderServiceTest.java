@@ -3,9 +3,12 @@ package ooppractice.domain.order.service;
 import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.order.domain.OrderStatus;
 import ooppractice.domain.order.exception.OrderNotFoundException;
+import ooppractice.domain.order.exception.PaymentNotCanceledException;
 import ooppractice.domain.order.repository.OrderRepository;
 import ooppractice.domain.orderitem.domain.OrderItem;
 import ooppractice.domain.orderitem.service.OrderItemService;
+import ooppractice.domain.payment.domain.Payment;
+import ooppractice.domain.payment.domain.PaymentStatus;
 import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.service.UserService;
 import ooppractice.global.util.GetLocalDateTime;
@@ -74,9 +77,13 @@ class OrderServiceTest {
         Long orderId = 1L;
         Long wrongId = 2L;
         given(orderRepository.findById(orderId)).willReturn(Optional.of(order));
+        Payment payment = Payment.builder().paymentStatus(PaymentStatus.COMPLETE).build();
+        order.setPayment(payment);
         //when
-        orderService.cancelOrder(orderId);
         //then
+        assertThrows(PaymentNotCanceledException.class, () -> orderService.cancelOrder(orderId));
+        order.getPayment().cancelPayment();
+        orderService.cancelOrder(orderId);
         assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.ORDER_CANCEL);
         assertThrows(OrderNotFoundException.class, () -> orderService.cancelOrder(wrongId));
     }
@@ -94,5 +101,18 @@ class OrderServiceTest {
         assertThat(order.getOrderDate()).isEqualTo(now);
         assertThat(order.getOrderItemList()).isEqualTo(orderItemList);
         assertThrows(OrderNotFoundException.class, () -> orderService.getOrderById(wrongId));
+    }
+
+    @Test
+    void getOrderList() {
+        //given
+        Long id = 1L;
+        Order order = Order.builder().orderStatus(OrderStatus.ORDER_COMPLETE).build();
+        user.addOrder(order);
+        given(userService.getUserById(id)).willReturn(user);
+        //when
+        List<Order> orderList = orderService.getOrderList(id);
+        //then
+        assertThat(orderList.get(0).getOrderStatus()).isEqualTo(OrderStatus.ORDER_COMPLETE);
     }
 }

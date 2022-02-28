@@ -11,7 +11,6 @@ import ooppractice.domain.payment.repository.PaymentRepository;
 import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.exception.NotEnoughMoneyException;
 import ooppractice.domain.user.exception.UserNotFoundException;
-import ooppractice.domain.user.service.UserService;
 import ooppractice.global.common.exception.ErrorCode;
 import ooppractice.global.util.GetLocalDateTime;
 
@@ -24,7 +23,6 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final OrderService orderService;
-    private final UserService userService;
     private final GetLocalDateTime getLocalDateTime;
 
     @Override
@@ -48,7 +46,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public List<Payment> getPaymentList(Long userId) throws UserNotFoundException {
-        List<Order> orderList = userService.getOrderList(userId);
+        List<Order> orderList = orderService.getOrderList(userId);
         return orderList.stream().map(Order::getPayment).collect(Collectors.toList());
     }
 }
