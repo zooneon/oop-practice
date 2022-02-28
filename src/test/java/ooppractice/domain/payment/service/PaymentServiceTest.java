@@ -1,6 +1,7 @@
 package ooppractice.domain.payment.service;
 
 import ooppractice.domain.order.domain.Order;
+import ooppractice.domain.order.domain.OrderStatus;
 import ooppractice.domain.order.service.OrderService;
 import ooppractice.domain.payment.domain.Payment;
 import ooppractice.domain.payment.domain.PaymentStatus;
@@ -72,12 +73,13 @@ class PaymentServiceTest {
     void cancelPayment() {
         //given
         Long id = 1L;
-        Payment payment = Payment.builder().paymentStatus(PaymentStatus.PAYMENT_COMPLETE).build();
+        Payment payment = Payment.builder().paymentStatus(PaymentStatus.PAYMENT_COMPLETE).order(order).build();
         given(paymentRepository.findById(id)).willReturn(Optional.of(payment));
         //when
         paymentService.cancelPayment(id);
         //then
         assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.PAYMENT_CANCEL);
+        assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.ORDER_CANCEL);
     }
 
     @Test

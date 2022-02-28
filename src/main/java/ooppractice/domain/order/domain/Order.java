@@ -61,5 +61,6 @@ public class Order extends Entity {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+        this.orderStatus = OrderStatus.ORDER_COMPLETE;
     }
 }

@@ -43,8 +43,9 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void cancelPayment(Long paymentId) throws PaymentAlreadyCanceledException {
+    public void cancelPayment(Long paymentId) throws PaymentAlreadyCanceledException, OrderAlreadyCanceledException {
         Payment foundPayment = paymentRepository.findById(paymentId).orElseThrow(() -> new PaymentNotFoundException(ErrorCode.PAYMENT_NOT_FOUND));
+        foundPayment.getOrder().cancelOrder();
         foundPayment.cancelPayment();
     }
 
