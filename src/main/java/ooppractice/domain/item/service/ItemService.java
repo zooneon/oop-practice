@@ -1,8 +1,6 @@
 package ooppractice.domain.item.service;
 
 import ooppractice.domain.item.domain.Item;
-import ooppractice.domain.item.dto.ItemListResponse;
-import ooppractice.domain.item.dto.ItemResponse;
 
 import java.util.List;
 

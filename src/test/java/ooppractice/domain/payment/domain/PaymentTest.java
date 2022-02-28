@@ -1,13 +1,11 @@
 package ooppractice.domain.payment.domain;
 
 import ooppractice.domain.order.domain.Order;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class PaymentTest {
 

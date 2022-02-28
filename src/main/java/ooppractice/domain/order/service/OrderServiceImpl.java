@@ -29,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order makeOrder(Long userId, String itemName, int quantity) throws UserNotFoundException, SoldOutException, OutOfStockException {
         LocalDateTime orderDate = getLocalDateTime.getNow();
-        User user = userService.getOrderUser(userId);
+        User user = userService.getUserById(userId);
         List<OrderItem> orderItemList = makeOrderItemList(itemName, quantity);
         Order order = Order.createOrder(orderDate, user, orderItemList);
         orderRepository.save(order);

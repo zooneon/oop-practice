@@ -1,14 +1,12 @@
 package ooppractice.domain.user.domain;
 
 import ooppractice.domain.order.domain.Order;
-import ooppractice.domain.orderitem.domain.OrderItem;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
 

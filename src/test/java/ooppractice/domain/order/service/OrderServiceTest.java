@@ -55,7 +55,7 @@ class OrderServiceTest {
         String itemName = "itemName";
         int quantity = 5;
         given(getLocalDateTime.getNow()).willReturn(now);
-        given(userService.getOrderUser(userId)).willReturn(user);
+        given(userService.getUserById(userId)).willReturn(user);
         given(orderItemService.makeOrderItem(itemName, quantity)).willReturn(orderItem);
         //when
         Order saved = orderService.makeOrder(userId, itemName, quantity);

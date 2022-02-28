@@ -1,12 +1,10 @@
 package ooppractice.domain.payment.repository;
 
 import ooppractice.domain.payment.domain.Payment;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class PaymentRepositoryTest {
 

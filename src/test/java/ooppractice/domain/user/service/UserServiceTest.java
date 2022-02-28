@@ -2,9 +2,7 @@ package ooppractice.domain.user.service;
 
 import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.order.domain.OrderStatus;
-import ooppractice.domain.order.dto.OrderListResponse;
 import ooppractice.domain.user.domain.User;
-import ooppractice.domain.user.dto.UserResponse;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.exception.WrongPasswordException;
 import ooppractice.domain.user.repository.UserRepository;
@@ -83,16 +81,5 @@ class UserServiceTest {
         List<Order> orderList = userService.getOrderList(id);
         //then
         assertThat(orderList.get(0).getOrderStatus()).isEqualTo(OrderStatus.ORDER_COMPLETE);
-    }
-
-    @Test
-    void getOrderUser() {
-        //given
-        Long id = 1L;
-        given(userRepository.findById(id)).willReturn(Optional.of(user));
-        //when
-        User orderUser = userService.getOrderUser(id);
-        //then
-        assertThat(orderUser).isEqualTo(user);
     }
 }
