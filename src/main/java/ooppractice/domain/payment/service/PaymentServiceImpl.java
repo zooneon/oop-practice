@@ -36,7 +36,7 @@ public class PaymentServiceImpl implements PaymentService {
         }
         int afterCalculateBenefit = paymentType.calculateBenefit(order.getTotalPrice());
         order.getUser().payCharge(afterCalculateBenefit);
-        Payment payment = Payment.makePayment(paymentDate, paymentType, order);
+        Payment payment = Payment.createPayment(paymentDate, paymentType, order);
         paymentRepository.save(payment);
         order.setPayment(payment);
         return payment;

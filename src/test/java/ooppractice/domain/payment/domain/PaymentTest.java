@@ -2,7 +2,6 @@ package ooppractice.domain.payment.domain;
 
 import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.payment.exception.PaymentAlreadyCanceledException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -13,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class PaymentTest {
 
     @Test
-    void makePayment() {
+    void createPayment() {
         //given
         LocalDateTime paymentDate = LocalDateTime.of(2022, 2, 27, 0, 0, 0);
         PaymentType paymentType = PaymentType.BM_PAY;
         Order order = Order.builder().build();
         //when
-        Payment payment = Payment.makePayment(paymentDate, paymentType, order);
+        Payment payment = Payment.createPayment(paymentDate, paymentType, order);
         //then
         assertThat(payment.getPaymentDate()).isEqualTo(paymentDate);
         assertThat(payment.getPaymentStatus()).isEqualTo(PaymentStatus.PAYMENT_COMPLETE);

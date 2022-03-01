@@ -30,7 +30,7 @@ public class Payment extends Entity {
         this.order = order;
     }
 
-    public static Payment makePayment(LocalDateTime paymentDate, PaymentType paymentType, Order order) {
+    public static Payment createPayment(LocalDateTime paymentDate, PaymentType paymentType, Order order) {
         return Payment.builder()
                 .paymentStatus(PaymentStatus.PAYMENT_COMPLETE)
                 .paymentDate(paymentDate)
