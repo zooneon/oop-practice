@@ -21,10 +21,10 @@ public enum UserGrade {
     }
 
     public UserGrade checkUpgrade(int amount) {
-        if (amount >= GOLD.standard) {
-            return GOLD;
-        } else if (amount >= PLATINUM.standard) {
+        if (amount >= PLATINUM.standard) {
             return PLATINUM;
+        } else if (amount >= GOLD.standard) {
+            return GOLD;
         } else {
             return SILVER;
         }

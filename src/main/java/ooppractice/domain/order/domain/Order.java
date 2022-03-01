@@ -54,9 +54,7 @@ public class Order extends Entity {
     }
 
     public int getTotalPrice() {
-        int totalPrice = 0;
-        orderItemList.stream().map(orderItem -> totalPrice + orderItem.calculatePrice());
-        return totalPrice;
+        return orderItemList.stream().mapToInt(OrderItem::calculatePrice).sum();
     }
 
     public void setPayment(Payment payment) {
