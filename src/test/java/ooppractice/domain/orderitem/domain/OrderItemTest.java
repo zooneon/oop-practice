@@ -30,4 +30,17 @@ class OrderItemTest {
         //then
         assertThat(orderItem.getOrder()).isEqualTo(order);
     }
+
+    @Test
+    void calculatePrice() {
+        //given
+        int itemPrice = 10000;
+        int orderQuantity = 5;
+        Item item = Item.builder().price(itemPrice).build();
+        OrderItem orderItem = OrderItem.builder().item(item).orderQuantity(orderQuantity).build();
+        //when
+        int price = orderItem.calculatePrice();
+        //then
+        assertThat(price).isEqualTo(itemPrice * orderQuantity);
+    }
 }

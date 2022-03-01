@@ -1,7 +1,9 @@
 package ooppractice.domain.order.domain;
 
+import ooppractice.domain.item.domain.Item;
 import ooppractice.domain.order.exception.OrderAlreadyCanceledException;
 import ooppractice.domain.orderitem.domain.OrderItem;
+import ooppractice.domain.payment.domain.Payment;
 import ooppractice.domain.user.domain.User;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OrderTest {
 
@@ -41,5 +43,34 @@ class OrderTest {
         //then
         assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.ORDER_CANCEL);
         assertThrows(OrderAlreadyCanceledException.class, () -> canceledOrder.cancelOrder());
+    }
+
+    @Test
+    void getTotalPrice() {
+        //given
+        int itemPrice = 10000;
+        int orderQuantity = 5;
+        Item item = Item.builder().price(itemPrice).build();
+        OrderItem firstItem = OrderItem.builder().item(item).orderQuantity(orderQuantity).build();
+        OrderItem secondItem = OrderItem.builder().item(item).orderQuantity(orderQuantity).build();
+        List<OrderItem> orderItemList = new ArrayList<>();
+        orderItemList.add(firstItem);
+        orderItemList.add(secondItem);
+        Order order = Order.builder().orderItemList(orderItemList).build();
+        //when
+        int totalPrice = order.getTotalPrice();
+        //then
+        assertThat(totalPrice).isEqualTo(firstItem.calculatePrice() + secondItem.calculatePrice());
+    }
+
+    @Test
+    void setPayment() {
+        //given
+        Order order = Order.builder().build();
+        Payment payment = Payment.builder().build();
+        //when
+        order.setPayment(payment);
+        //then
+        assertThat(order.getPayment()).isEqualTo(payment);
     }
 }

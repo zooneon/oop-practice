@@ -19,4 +19,17 @@ class UserGradeTest {
         assertThat(ofGold).isEqualTo(10500);  //GOLD 등급은 5%의 적립 혜택이 있다.
         assertThat(ofPlatinum).isEqualTo(11000);  //PLATINUM 등급은 10%의 적립 혜택이 있다.
     }
+
+    @Test
+    void checkUpgrade() {
+        //given
+        int goldStandard = 50000;
+        int platinumStandard = 100000;
+        //when
+        UserGrade maybeGold = UserGrade.SILVER.checkUpgrade(goldStandard);
+        UserGrade maybePlatinum = UserGrade.GOLD.checkUpgrade(platinumStandard);
+        //then
+        assertThat(maybeGold).isEqualTo(UserGrade.GOLD);
+        assertThat(maybePlatinum).isEqualTo(UserGrade.PLATINUM);
+    }
 }
