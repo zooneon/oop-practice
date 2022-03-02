@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import ooppractice.domain.category.domain.Category;
 import ooppractice.domain.category.exception.CategoryNotFoundException;
 import ooppractice.domain.category.repository.CategoryRepository;
-import ooppractice.global.common.exception.ErrorCode;
+import ooppractice.global.exception.ErrorCode;
 
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {

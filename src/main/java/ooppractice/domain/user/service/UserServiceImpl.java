@@ -5,7 +5,7 @@ import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.exception.WrongPasswordException;
 import ooppractice.domain.user.repository.UserRepository;
-import ooppractice.global.common.exception.ErrorCode;
+import ooppractice.global.exception.ErrorCode;
 
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {

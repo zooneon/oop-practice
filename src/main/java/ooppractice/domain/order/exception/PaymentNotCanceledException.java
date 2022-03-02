@@ -1,7 +1,7 @@
 package ooppractice.domain.order.exception;
 
-import ooppractice.global.common.exception.ErrorCode;
-import ooppractice.global.common.exception.GlobalException;
+import ooppractice.global.exception.ErrorCode;
+import ooppractice.global.exception.GlobalException;
 
 public class PaymentNotCanceledException extends GlobalException {
 

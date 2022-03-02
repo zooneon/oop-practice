@@ -14,7 +14,7 @@ import ooppractice.domain.payment.domain.PaymentStatus;
 import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.service.UserService;
-import ooppractice.global.common.exception.ErrorCode;
+import ooppractice.global.exception.ErrorCode;
 import ooppractice.global.util.GetLocalDateTime;
 
 import java.time.LocalDateTime;

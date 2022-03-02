@@ -13,7 +13,7 @@ import ooppractice.domain.payment.exception.PaymentNotFoundException;
 import ooppractice.domain.payment.repository.PaymentRepository;
 import ooppractice.domain.user.exception.NotEnoughMoneyException;
 import ooppractice.domain.user.exception.UserNotFoundException;
-import ooppractice.global.common.exception.ErrorCode;
+import ooppractice.global.exception.ErrorCode;
 import ooppractice.global.util.GetLocalDateTime;
 
 import java.time.LocalDateTime;

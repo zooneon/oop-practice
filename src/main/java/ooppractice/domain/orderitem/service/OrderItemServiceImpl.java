@@ -9,7 +9,7 @@ import ooppractice.domain.orderitem.domain.OrderItem;
 import ooppractice.domain.orderitem.exception.OutOfStockException;
 import ooppractice.domain.orderitem.exception.SoldOutException;
 import ooppractice.domain.orderitem.repository.OrderItemRepository;
-import ooppractice.global.common.exception.ErrorCode;
+import ooppractice.global.exception.ErrorCode;
 
 @RequiredArgsConstructor
 public class OrderItemServiceImpl implements OrderItemService {

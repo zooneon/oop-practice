@@ -3,7 +3,7 @@ package ooppractice.domain.user.domain;
 import lombok.*;
 import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.user.exception.NotEnoughMoneyException;
-import ooppractice.global.common.exception.ErrorCode;
+import ooppractice.global.exception.ErrorCode;
 import ooppractice.global.common.repository.Entity;
 
 import java.util.ArrayList;

@@ -7,7 +7,7 @@ import ooppractice.domain.category.service.CategoryService;
 import ooppractice.domain.item.domain.Item;
 import ooppractice.domain.item.exception.ItemNotFoundException;
 import ooppractice.domain.item.repository.ItemRepository;
-import ooppractice.global.common.exception.ErrorCode;
+import ooppractice.global.exception.ErrorCode;
 
 import java.util.List;
 

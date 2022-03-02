@@ -8,7 +8,7 @@ import ooppractice.domain.order.exception.OrderAlreadyCanceledException;
 import ooppractice.domain.orderitem.domain.OrderItem;
 import ooppractice.domain.payment.domain.Payment;
 import ooppractice.domain.user.domain.User;
-import ooppractice.global.common.exception.ErrorCode;
+import ooppractice.global.exception.ErrorCode;
 import ooppractice.global.common.repository.Entity;
 
 import java.time.LocalDateTime;

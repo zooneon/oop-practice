@@ -1,4 +1,4 @@
-package ooppractice.global.common.exception;
+package ooppractice.global.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

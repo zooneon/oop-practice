@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.payment.exception.PaymentAlreadyCanceledException;
-import ooppractice.global.common.exception.ErrorCode;
+import ooppractice.global.exception.ErrorCode;
 import ooppractice.global.common.repository.Entity;
 
 import java.time.LocalDateTime;
