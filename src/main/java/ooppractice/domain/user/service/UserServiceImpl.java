@@ -13,12 +13,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public Long login(String username, String password) {
+    public User login(String username, String password) {
         User foundUser = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
         if (foundUser.getPassword() != password) {
             throw new WrongPasswordException(ErrorCode.WRONG_PASSWORD);
         }
-        return foundUser.getId();
+        return foundUser;
     }
 
     @Override

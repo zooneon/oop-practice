@@ -37,7 +37,9 @@ class UserServiceTest {
         given(userRepository.findByUsername(username)).willReturn(Optional.of(user));
         given(userRepository.findByUsername(wrongUsername)).willThrow(new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
         //when
+        User loginUser = userService.login(username, password);
         //then
+        assertThat(loginUser).isEqualTo(user);
         assertThrows(UserNotFoundException.class, () -> userService.login(wrongUsername, password));
         assertThrows(WrongPasswordException.class, () -> userService.login(username, wrongPassword));
     }
