@@ -1,5 +1,6 @@
-package ooppractice;
+package ooppractice.global.util;
 
+import ooppractice.global.config.AppConfig;
 import ooppractice.domain.category.domain.Category;
 import ooppractice.domain.category.repository.CategoryRepository;
 import ooppractice.domain.item.domain.Item;

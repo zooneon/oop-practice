@@ -1,4 +1,4 @@
-package ooppractice;
+package ooppractice.global.config;
 
 import lombok.AccessLevel;
 import lombok.Getter;

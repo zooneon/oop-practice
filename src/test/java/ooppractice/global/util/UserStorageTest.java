@@ -1,11 +1,10 @@
-package ooppractice;
+package ooppractice.global.util;
 
 import ooppractice.domain.user.domain.User;
-import org.assertj.core.api.Assertions;
+import ooppractice.global.util.UserStorage;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserStorageTest {
 

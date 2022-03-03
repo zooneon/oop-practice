@@ -1,4 +1,4 @@
-package ooppractice;
+package ooppractice.global.util;
 
 import ooppractice.domain.user.domain.User;
 
