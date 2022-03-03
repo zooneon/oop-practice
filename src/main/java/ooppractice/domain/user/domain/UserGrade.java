@@ -2,15 +2,16 @@ package ooppractice.domain.user.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import ooppractice.global.util.Constant;
 
 import java.util.function.Function;
 
 @Getter
 @RequiredArgsConstructor
 public enum UserGrade {
-    SILVER("SILVER", value -> value + (value * 0.03), 0),
-    GOLD("GOLD", value -> value + (value * 0.05), 50000),
-    PLATINUM("PLATINUM", value -> value + (value * 0.1), 100000);
+    SILVER("SILVER", amount -> amount + (amount * Constant.SILVER_BENEFIT), Constant.SILVER_STANDARD),
+    GOLD("GOLD", amount -> amount + (amount * Constant.GOLD_BENEFIT), Constant.GOLD_STANDARD),
+    PLATINUM("PLATINUM", amount -> amount + (amount * Constant.PLATINUM_BENEFIT), Constant.PLATINUM_STANDARD);
 
     private final String grade;
     private final Function<Integer, Double> expression;

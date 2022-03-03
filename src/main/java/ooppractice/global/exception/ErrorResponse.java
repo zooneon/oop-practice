@@ -23,10 +23,12 @@ public class ErrorResponse {
 
     @Override
     public String toString() {
-        StringBuffer output = new StringBuffer();
-        output.append(Constant.ERROR_CODE.getValue())
+        StringBuilder output = new StringBuilder();
+        output.append(Constant.ERROR_CODE)
+                .append(Constant.SEMICOLON)
+                .append(Constant.BLANK)
                 .append(code)
-                .append(Constant.ENTER.getValue())
+                .append(Constant.NEXT_LINE)
                 .append(message);
         return output.toString();
     }
