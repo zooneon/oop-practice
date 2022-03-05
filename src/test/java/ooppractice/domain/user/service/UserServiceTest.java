@@ -1,6 +1,7 @@
 package ooppractice.domain.user.service;
 
 import ooppractice.domain.user.domain.User;
+import ooppractice.domain.user.exception.InvalidAmountException;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.exception.WrongPasswordException;
 import ooppractice.domain.user.repository.UserRepository;
@@ -62,10 +63,12 @@ class UserServiceTest {
         Long id = 1L;
         int amount = 10000;
         int expected = 10300;  //SILVER 등급은 3%의 적립 혜택이 있다.
+        int invalidAmount = 0;
         given(userRepository.findById(id)).willReturn(Optional.of(user));
         //when
         userService.makeDeposit(id, amount);
         //then
         assertThat(user.getDepositedMoney()).isEqualTo(expected);
+        assertThrows(InvalidAmountException.class, () -> userService.makeDeposit(id, invalidAmount));
     }
 }
