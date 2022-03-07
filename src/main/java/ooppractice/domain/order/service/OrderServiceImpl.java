@@ -59,7 +59,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getOrderList(Long userId) throws UserNotFoundException {
         User foundUser = userService.getUserById(userId);
-        return foundUser.getOrderList();
+        List<Order> orderList = foundUser.getOrderList();
+        orderList.forEach(order -> {
+            if (order == null) {
+                throw new OrderNotFoundException(ErrorCode.ORDER_NOT_FOUND);
+            }
+        });
+        return orderList;
     }
 
     private List<OrderItem> makeOrderItemList(String itemName, int quantity) throws SoldOutException, OutOfStockException {

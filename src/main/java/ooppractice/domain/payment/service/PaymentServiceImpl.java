@@ -52,6 +52,12 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public List<Payment> getPaymentList(Long userId) throws UserNotFoundException {
         List<Order> orderList = orderService.getOrderList(userId);
-        return orderList.stream().map(Order::getPayment).collect(Collectors.toList());
+        List<Payment> paymentList = orderList.stream().map(Order::getPayment).collect(Collectors.toList());
+        paymentList.forEach(payment -> {
+            if (payment == null) {
+                throw new PaymentNotFoundException(ErrorCode.PAYMENT_NOT_FOUND);
+            }
+        });
+        return paymentList;
     }
 }
