@@ -20,10 +20,12 @@ class UserRepositoryTest {
     @Test
     void findByUsername () {
         //given
-        User saved = userRepository.save(User.builder().username("username").password("password").build());
+        String username = "username";
+        String wrongName = "wrongName";
+        User saved = userRepository.save(User.builder().username(username).build());
         //when
-        Optional<User> validUser = userRepository.findByUsername(saved.getUsername());
-        Optional<User> invalidUser = userRepository.findByUsername("invalid");
+        Optional<User> validUser = userRepository.findByUsername(username);
+        Optional<User> invalidUser = userRepository.findByUsername(wrongName);
         //then
         assertThat(validUser.get()).isEqualTo(saved);
         assertThat(invalidUser).isEmpty();

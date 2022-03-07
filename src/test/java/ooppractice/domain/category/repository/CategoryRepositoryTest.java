@@ -12,7 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CategoryRepositoryTest {
 
     private CategoryRepository categoryRepository = new CategoryRepository();
-    private Category category = Category.builder().categoryName("categoryName").build();
+    private String categoryName = "categoryName";
+    private Category category = Category.builder().categoryName(categoryName).build();
 
     @BeforeEach
     void setUp() {
@@ -27,15 +28,15 @@ class CategoryRepositoryTest {
     @Test
     void save() {
         //given
+        Long savedId = 1L;
         //when
         //then
-        assertThat(category.getId()).isEqualTo(1L);
+        assertThat(category.getId()).isEqualTo(savedId);
     }
 
     @Test
     void findByCategoryName() {
         //given
-        String categoryName = "categoryName";
         String wrongName = "wrongName";
         //when
         Optional<Category> validCategory = categoryRepository.findByCategoryName(categoryName);

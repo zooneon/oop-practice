@@ -26,7 +26,8 @@ class OrderItemServiceTest {
     @InjectMocks
     private OrderItemServiceImpl orderItemService;
 
-    private Item item = Item.builder().stockQuantity(10).build();
+    int stockQuantity = 10;
+    private Item item = Item.builder().stockQuantity(stockQuantity).build();
 
     @Test
     void makeOrderItem() {

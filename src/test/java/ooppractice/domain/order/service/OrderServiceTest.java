@@ -40,7 +40,7 @@ class OrderServiceTest {
     private OrderServiceImpl orderService;
 
     private LocalDateTime now = LocalDateTime.of(2022, 2, 25, 12, 0, 0);;
-    private User user = User.builder().username("username").password("password").build();
+    private User user = User.builder().build();
     private Order order;
     private OrderItem orderItem = OrderItem.builder().build();
     private List<OrderItem> orderItemList = new ArrayList<>();

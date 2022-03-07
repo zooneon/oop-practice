@@ -26,13 +26,13 @@ class UserServiceTest {
     @InjectMocks
     private UserServiceImpl userService;
 
-    private User user = User.builder().username("username").password("password").build();
+    String username = "username";
+    String password = "password";
+    private User user = User.builder().username(username).password(password).build();
 
     @Test
     void login() {
         //given
-        String username = "username";
-        String password = "password";
         String wrongUsername = "wrongUsername";
         String wrongPassword = "wrongPassword";
         given(userRepository.findByUsername(username)).willReturn(Optional.of(user));

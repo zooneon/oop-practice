@@ -18,10 +18,11 @@ class PaymentRepositoryTest {
     @Test
     void save() {
         //given
+        Long savedId = 1L;
         Payment payment = Payment.builder().build();
         //when
         paymentRepository.save(payment);
         //then
-        assertThat(payment.getId()).isEqualTo(1L);
+        assertThat(payment.getId()).isEqualTo(savedId);
     }
 }

@@ -7,7 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CategoryTest {
 
-    private Category category = Category.builder().categoryName("categoryName").build();
+    private String categoryName = "categoryName";
+    private Category category = Category.builder().categoryName(categoryName).build();
 
 
     @Test

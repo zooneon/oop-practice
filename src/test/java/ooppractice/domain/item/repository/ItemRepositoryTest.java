@@ -12,7 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ItemRepositoryTest {
 
     private ItemRepository itemRepository = new ItemRepository();
-    private Item item = Item.builder().itemName("itemName").build();
+    private String itemName = "itemName";
+    private Item item = Item.builder().itemName(itemName).build();
 
     @BeforeEach
     void setUp() {
@@ -27,15 +28,15 @@ class ItemRepositoryTest {
     @Test
     void setId() {
         //given
+        Long savedId = 1L;
         //when
         //then
-        assertThat(item.getId()).isEqualTo(1L);
+        assertThat(item.getId()).isEqualTo(savedId);
     }
 
     @Test
     void findByItemName() {
         //given
-        String itemName = "itemName";
         String wrongName = "wrongName";
         //when
         Optional<Item> validItem = itemRepository.findByItemName(itemName);

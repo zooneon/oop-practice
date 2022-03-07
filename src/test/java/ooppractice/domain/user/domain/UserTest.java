@@ -15,18 +15,19 @@ class UserTest {
     @Test
     void deposit() {
         //given
-        User user = User.builder().username("username").password("password").build();
+        int amount = 1000;
+        User user = User.builder().build();
         //when
-        user.deposit(1000);
+        user.deposit(amount);
         //then
-        assertThat(user.getDepositedMoney()).isEqualTo(1000);
+        assertThat(user.getDepositedMoney()).isEqualTo(amount);
     }
 
     @Test
     void addOrder() {
         //given
-        User user = User.builder().username("username").password("password").build();
-        Order order = Order.builder().orderDate(LocalDateTime.now()).user(user).orderItemList(new ArrayList<>()).build();
+        User user = User.builder().build();
+        Order order = Order.builder().build();
         //when
         user.addOrder(order);
         //then
@@ -37,13 +38,14 @@ class UserTest {
     void payCharge() {
         //given
         User testUser = User.builder().build();
+        int amount = 50000;
         int testMoney = 50000;
         int exceedMoney = 100000;
-        testUser.deposit(50000);
+        testUser.deposit(amount);
         //when
         testUser.payCharge(testMoney);
         //then
-        assertThat(testUser.getDepositedMoney()).isEqualTo(0);
+        assertThat(testUser.getDepositedMoney()).isEqualTo(amount - testMoney);
         assertThat(testUser.getPayedMoney()).isEqualTo(testMoney);
         assertThat(testUser.getUserGrade()).isEqualTo(UserGrade.GOLD);
         assertThrows(NotEnoughMoneyException.class, () -> testUser.payCharge(exceedMoney));

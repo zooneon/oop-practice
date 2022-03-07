@@ -28,12 +28,12 @@ class ItemServiceTest {
     @InjectMocks
     private ItemServiceImpl itemService;
 
-    private Item item = Item.builder().itemName("itemName").build();
+    private String itemName = "itemName";
+    private Item item = Item.builder().itemName(itemName).build();
 
     @Test
     void getItemByItemName() {
         //given
-        String itemName = "itemName";
         String wrongName = "wrongName";
         given(itemRepository.findByItemName(itemName)).willReturn(Optional.of(item));
         //when

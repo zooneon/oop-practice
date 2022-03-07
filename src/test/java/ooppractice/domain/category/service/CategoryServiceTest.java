@@ -23,12 +23,12 @@ class CategoryServiceTest {
     @InjectMocks
     private CategoryServiceImpl categoryService;
 
-    private Category category = Category.builder().categoryName("categoryName").build();
+    private String categoryName = "categoryName";
+    private Category category = Category.builder().categoryName(categoryName).build();
 
     @Test
     void getCategoryByName() {
         //given
-        String categoryName = "categoryName";
         String wrongName = "wrongName";
         given(categoryRepository.findByCategoryName(categoryName)).willReturn(Optional.of(category));
         //when

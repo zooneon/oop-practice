@@ -56,11 +56,12 @@ class CrudRepositoryTest {
     @Test
     void existsById() {
         //given
+        Long invalidId = 100L;
         Entity entity = new Entity();
         Entity saved = crudRepository.save(entity);
         //when
         boolean checkTrue = crudRepository.existsById(saved.getId());
-        boolean checkFalse = crudRepository.existsById(100L);
+        boolean checkFalse = crudRepository.existsById(invalidId);
         //then
         assertThat(checkTrue).isTrue();
         assertThat(checkFalse).isFalse();

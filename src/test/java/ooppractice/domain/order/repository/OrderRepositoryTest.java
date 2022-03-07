@@ -18,10 +18,11 @@ class OrderRepositoryTest {
     @Test
     void save() {
         //given
+        Long savedId = 1L;
         Order order = Order.builder().build();
         //when
         orderRepository.save(order);
         //then
-        assertThat(order.getId()).isEqualTo(1L);
+        assertThat(order.getId()).isEqualTo(savedId);
     }
 }
