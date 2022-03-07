@@ -1,6 +1,7 @@
 package ooppractice.view.mypage;
 
 import ooppractice.global.common.view.AbstractView;
+import ooppractice.global.config.AppConfig;
 import ooppractice.global.exception.ErrorCode;
 import ooppractice.global.exception.ErrorResponse;
 import ooppractice.view.exception.SelectionException;
@@ -9,12 +10,12 @@ import java.util.Scanner;
 
 import static ooppractice.global.util.Constant.*;
 
-public class MyPageView extends AbstractView {
+public class MyPageMainView extends AbstractView {
 
-    private static final String MY_INFO = "내 정보 확인";
+    private static final String MY_INFO = "내 정보 확인하기";
     private static final String DEPOSIT = "입금하기";
 
-    public MyPageView(Scanner scanner) {
+    public MyPageMainView(Scanner scanner) {
         super(scanner);
     }
 
@@ -30,11 +31,9 @@ public class MyPageView extends AbstractView {
             try {
                 int userInput = scanner.nextInt();
                 if (userInput == OPTION_ONE) {
-                    MyInfoView myInfoView = new MyInfoView(scanner);
-                    myInfoView.start();
+                    AppConfig.getMyPageInfoView().start();
                 } else if (userInput == OPTION_TWO) {
-                    DepositView depositView = new DepositView(scanner);
-                    depositView.start();
+                    AppConfig.getMyPageDepositView().start();
                 } else if (userInput == OPTION_THREE) {
                     break;
                 } else {

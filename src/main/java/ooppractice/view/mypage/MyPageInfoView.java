@@ -4,7 +4,6 @@ import ooppractice.domain.user.domain.User;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.service.UserService;
 import ooppractice.global.common.view.AbstractView;
-import ooppractice.global.config.AppConfig;
 import ooppractice.global.exception.ErrorCode;
 import ooppractice.global.util.UserIdStorage;
 
@@ -12,15 +11,16 @@ import java.util.Scanner;
 
 import static ooppractice.global.util.Constant.*;
 
-public class MyInfoView extends AbstractView {
+public class MyPageInfoView extends AbstractView {
 
     private static final String MY_GRADE = "내 등급";
     private static final String DEPOSITED_MONEY = "보유 금액";
 
-    private UserService userService = AppConfig.getUserService();
+    private final UserService userService;
 
-    public MyInfoView(Scanner scanner) {
+    public MyPageInfoView(Scanner scanner, UserService userService) {
         super(scanner);
+        this.userService = userService;
     }
 
     @Override

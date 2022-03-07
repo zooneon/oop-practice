@@ -4,22 +4,22 @@ import ooppractice.domain.user.exception.InvalidAmountException;
 import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.service.UserService;
 import ooppractice.global.common.view.AbstractView;
-import ooppractice.global.config.AppConfig;
 import ooppractice.global.exception.ErrorCode;
 import ooppractice.global.exception.ErrorResponse;
 import ooppractice.global.util.UserIdStorage;
 
 import java.util.Scanner;
 
-public class DepositView extends AbstractView {
+public class MyPageDepositView extends AbstractView {
 
     private static final String DEPOSIT_INPUT_MESSAGE = "[입금할 금액을 원단위로 입력하세요]";
     private static final String DEPOSIT_SUCCESS_MESSAGE = "[입금 완료]";
 
-    private UserService userService = AppConfig.getUserService();
+    private final UserService userService;
 
-    public DepositView(Scanner scanner) {
+    public MyPageDepositView(Scanner scanner, UserService userService) {
         super(scanner);
+        this.userService = userService;
     }
 
     @Override
