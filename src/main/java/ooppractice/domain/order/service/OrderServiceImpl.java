@@ -1,6 +1,7 @@
 package ooppractice.domain.order.service;
 
 import lombok.RequiredArgsConstructor;
+import ooppractice.domain.item.exception.ItemNotFoundException;
 import ooppractice.domain.order.domain.Order;
 import ooppractice.domain.order.exception.OrderAlreadyCanceledException;
 import ooppractice.domain.order.exception.OrderNotFoundException;
@@ -30,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     private final GetLocalDateTime getLocalDateTime;
 
     @Override
-    public Order makeOrder(Long userId, String itemName, int quantity) throws UserNotFoundException, SoldOutException, OutOfStockException {
+    public Order makeOrder(Long userId, String itemName, int quantity) throws ItemNotFoundException, UserNotFoundException, SoldOutException, OutOfStockException {
         LocalDateTime orderDate = getLocalDateTime.getNow();
         User user = userService.getUserById(userId);
         List<OrderItem> orderItemList = makeOrderItemList(itemName, quantity);
@@ -68,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
-    private List<OrderItem> makeOrderItemList(String itemName, int quantity) throws SoldOutException, OutOfStockException {
+    private List<OrderItem> makeOrderItemList(String itemName, int quantity) throws ItemNotFoundException, SoldOutException, OutOfStockException {
         List<OrderItem> orderItemList = new ArrayList<>();
         OrderItem orderItem = orderItemService.makeOrderItem(itemName, quantity);
         orderItemList.add(orderItem);

@@ -15,6 +15,7 @@ public enum ErrorCode {
     USER_NOT_FOUND("U001", "해당 사용자를 찾을 수 없습니다."),
     WRONG_PASSWORD("U002", "비밀번호가 일치하지 않습니다."),
     INVALID_AMOUNT("U003", "입금액은 " + Constant.LOWER_LIMIT_OF_DEPOSIT_AMOUNT + "원보다 커야합니다."),
+    LOGIN_USER_NOT_FOUND("U004", "로그인한 사용자를 찾을 수 없습니다. 프로그램을 다시 시작해주세요."),
 
     //order
     ORDER_NOT_FOUND("OR001", "해당 주문 정보를 찾을 수 없습니다."),
