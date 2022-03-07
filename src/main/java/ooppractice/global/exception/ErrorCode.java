@@ -33,7 +33,8 @@ public enum ErrorCode {
     //payment
     PAYMENT_NOT_FOUND("P001", "해당 결제 정보를 찾을 수 없습니다."),
     NOT_ENOUGH_MONEY("P002", "입금액이 부족합니다."),
-    PAYMENT_ALREADY_CANCELED("P003", "이미 취소된 결제입니다.");
+    PAYMENT_ALREADY_CANCELED("P003", "이미 취소된 결제입니다."),
+    PAYMENT_TYPE_NOT_FOUND("P004", "해당 결제 방법은 존재하지 않습니다.");
 
     private final String code;
     private final String message;
