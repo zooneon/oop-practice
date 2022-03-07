@@ -7,6 +7,7 @@ import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.exception.WrongPasswordException;
 import ooppractice.domain.user.repository.UserRepository;
 import ooppractice.global.exception.ErrorCode;
+import ooppractice.global.util.Constant;
 
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void makeDeposit(Long id, int amount) {
-        if (amount <= 0) {
+        if (amount <= Constant.LOWER_LIMIT_OF_DEPOSIT_AMOUNT) {
             throw new InvalidAmountException(ErrorCode.INVALID_AMOUNT);
         }
         User foundUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
