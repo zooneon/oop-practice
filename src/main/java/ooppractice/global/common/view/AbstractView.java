@@ -15,6 +15,8 @@ public abstract class AbstractView {
 
     public abstract void start();
 
+    protected abstract void selectOption();
+
     protected abstract void showMessage();
 
     protected void clearSb() {

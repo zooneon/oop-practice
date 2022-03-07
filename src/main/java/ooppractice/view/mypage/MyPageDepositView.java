@@ -1,9 +1,11 @@
-package ooppractice.view;
+package ooppractice.view.mypage;
 
 import ooppractice.domain.user.exception.InvalidAmountException;
+import ooppractice.domain.user.exception.UserNotFoundException;
 import ooppractice.domain.user.service.UserService;
 import ooppractice.global.common.view.AbstractView;
 import ooppractice.global.config.AppConfig;
+import ooppractice.global.exception.ErrorCode;
 import ooppractice.global.exception.ErrorResponse;
 import ooppractice.global.util.UserIdStorage;
 
@@ -25,6 +27,10 @@ public class DepositView extends AbstractView {
         deposit();
     }
 
+    @Override
+    protected void selectOption() {
+    }
+
     private void deposit() {
         while (true) {
             showMessage();
@@ -36,6 +42,8 @@ public class DepositView extends AbstractView {
                 break;
             } catch (InvalidAmountException e) {
                 System.out.println(ErrorResponse.of(e.getErrorCode()));
+            } catch (UserNotFoundException e) {
+                throw new UserNotFoundException(ErrorCode.LOGIN_USER_NOT_FOUND);
             }
         }
     }
