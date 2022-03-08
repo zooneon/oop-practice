@@ -1,9 +1,12 @@
 package ooppractice;
 
-import java.util.Scanner;
+import ooppractice.global.config.AppConfig;
+import ooppractice.global.util.DataInit;
 
 public class Application {
     public static void main(String[] args) {
-        final Scanner scanner = new Scanner(System.in);
+        AppConfig.configure();
+        DataInit.init();
+        AppConfig.getLoginView().start();
     }
 }
