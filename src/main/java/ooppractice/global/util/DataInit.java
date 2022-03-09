@@ -14,9 +14,11 @@ public class DataInit {
     private static ItemRepository itemRepository = AppConfig.getItemRepository();
     private static CategoryRepository categoryRepository = AppConfig.getCategoryRepository();
 
-    //food
+    //user
     private static final String USER_USERNAME = "tester";
     private static final String USER_PASSWORD = "1234";
+
+    //food
     private static final String ITEM_CHICKEN_NAME = "치킨";
     private static final int ITEM_CHICKEN_PRICE = 15000;
     private static final int ITEM_CHICKEN_QUANTITY = 500;
